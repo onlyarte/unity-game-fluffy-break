@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
 	public void Update()
 	{
-		mycam.orthographicSize = (Screen.height / 100f) / 0.7f;
+		mycam.orthographicSize = (Screen.height / 60f) / 0.7f;
 
 		if (Player) 
 		{

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
     public bool isLaserOn = true;
+    public float scale = 0.6f;
 
     Sprite laserSprite = null;
     SpriteRenderer sr = null;
@@ -25,7 +26,7 @@ public class Laser : MonoBehaviour {
 	public void LaserOn()
     {
         transform.position = position;
-        transform.localScale += new Vector3(0, 0.6F, 0);
+        transform.localScale = new Vector3(transform.localScale.x, scale, transform.localScale.z);
 
     }
 
