@@ -40,32 +40,29 @@ public class PlayerController : MonoBehaviour {
 
 
 	void OnCollisionEnter2D(Collision2D collision2D) {
-		
 		if (collision2D.relativeVelocity.magnitude > 20){
 			Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
 		}
 	}
 
-	void Update () {
+	void Update ()
+    {
+	    if (Input.GetButtonDown("Jump") && (isGrounded || !doubleJump))
+		    {
+			    rb2d.AddForce(new Vector2(0,jumpForce));
 
-	if (Input.GetButtonDown("Jump") && (isGrounded || !doubleJump))
-		{
-			rb2d.AddForce(new Vector2(0,jumpForce));
+			    if (!doubleJump && !isGrounded)
+			    {
+				    doubleJump = true;
+				    Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
+			    }
+		    }
 
-			if (!doubleJump && !isGrounded)
-			{
-				doubleJump = true;
-				Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
-			}
-		}
-
-
-	if (Input.GetButtonDown("Vertical") && !isGrounded)
-		{
-			rb2d.AddForce(new Vector2(0,-jumpForce));
-			Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
-		}
-
+	    if (Input.GetButtonDown("Vertical") && !isGrounded)
+		    {
+			    rb2d.AddForce(new Vector2(0,-jumpForce));
+			    Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
+		    }
 	}
 
 
@@ -81,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 
 		rb2d.velocity = new Vector2 (hor * maxSpeed, rb2d.velocity.y);
 		  
-		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 0.15F, whatIsGround);
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, 1F, whatIsGround);
 
 		anim.SetBool ("IsGrounded", isGrounded);
 

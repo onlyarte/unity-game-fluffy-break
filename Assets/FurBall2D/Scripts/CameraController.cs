@@ -14,15 +14,11 @@ public class CameraController : MonoBehaviour
 
 	public void Update()
 	{
-
 		mycam.orthographicSize = (Screen.height / 100f) / 0.7f;
 
 		if (Player) 
 		{
-		
 			transform.position = Vector3.Lerp(transform.position, Player.position, m_speed) + new Vector3(0, 0, -12);
 		}
-
-
 	}
 }
