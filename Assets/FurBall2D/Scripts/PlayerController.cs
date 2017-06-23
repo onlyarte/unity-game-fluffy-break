@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+
+    public static PlayerController current;
 	
 	public float maxSpeed = 6f;
 	public float jumpForce = 1000f;
@@ -16,20 +18,24 @@ public class PlayerController : MonoBehaviour {
 	private Animator cloudanim;
 	public GameObject Cloud;
 
-
 	private Rigidbody2D rb2d;
 	private Animator anim;
 	private bool isGrounded = false;
 
+    private Vector3 startingPosition;
 
-	// Use this for initialization
+    void Awake()
+    {
+        current = this;
+    }
+
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D>();
+        startingPosition = transform.position;
+
+        rb2d = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
-		//cloudanim = GetComponent<Animator>();
 
 		Cloud = GameObject.Find("Cloud");
-  		//cloudanim = GameObject.Find("Cloud(Clone)").GetComponent<Animator>();
 	}
 
 
@@ -37,14 +43,9 @@ public class PlayerController : MonoBehaviour {
 		
 		if (collision2D.relativeVelocity.magnitude > 20){
 			Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
-		//	cloudanim.Play("cloud");	
-
 		}
 	}
 
-
-	
-	// Update is called once per frame
 	void Update () {
 
 	if (Input.GetButtonDown("Jump") && (isGrounded || !doubleJump))
@@ -55,7 +56,6 @@ public class PlayerController : MonoBehaviour {
 			{
 				doubleJump = true;
 				Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
-			//	cloudanim.Play("cloud");		
 			}
 		}
 
@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			rb2d.AddForce(new Vector2(0,-jumpForce));
 			Boost = Instantiate(Resources.Load("Prefabs/Cloud"), transform.position, transform.rotation) as GameObject;
-			//cloudanim.Play("cloud");
 		}
 
 	}
@@ -101,5 +100,10 @@ public class PlayerController : MonoBehaviour {
 		myScale.x *= -1;
 		transform.localScale = myScale;
 	}
+
+    public void Death()
+    {
+        transform.position = startingPosition;
+    }
 
 }

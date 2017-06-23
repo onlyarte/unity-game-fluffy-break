@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestButton : ButtonAbstract { 
+public class TestButton : ButtonAbstract {
 
-	protected override void ButtonEnterAction()
+    public Laser laser;
+
+	protected override IEnumerator ButtonEnterAction()
     {
-
+        yield return new WaitForSeconds(0);
+        laser.LaserOff();
     }
 
-    protected override void ButtonExitAction()
+    protected override IEnumerator ButtonExitAction()
     {
-
+        yield return new WaitForSeconds(1);
+        laser.LaserOn();
     }
 
 }

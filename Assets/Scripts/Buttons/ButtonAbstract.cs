@@ -9,18 +9,20 @@ public class ButtonAbstract : MonoBehaviour {
 
     private new SpriteRenderer renderer = null;
 
-    protected virtual void ButtonEnterAction()
+    protected virtual IEnumerator ButtonEnterAction()
     {
+        return null;
     }
 
-    protected virtual void ButtonExitAction()
+    protected virtual IEnumerator ButtonExitAction()
     {
+        return null;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         PressButton();
-        this.ButtonEnterAction();
+        StartCoroutine(this.ButtonEnterAction());
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -31,7 +33,7 @@ public class ButtonAbstract : MonoBehaviour {
     void OnTriggerExit2D(Collider2D collider)
     {
         UnpressButton();
-        this.ButtonExitAction();
+        StartCoroutine(this.ButtonExitAction());
     }
 
     void Awake()
