@@ -14,6 +14,7 @@ public class OpenDoorButton : ButtonAbstract {
 
     protected override IEnumerator ButtonExitAction()
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(5);
+        door.DoorClose();
     }
 }
