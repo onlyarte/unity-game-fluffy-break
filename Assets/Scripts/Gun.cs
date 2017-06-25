@@ -15,8 +15,7 @@ public class Gun : MonoBehaviour {
         if (isPlayerInRange())
         {
             Vector3 latePosition = getPlayerPosition();
-            StartCoroutine(WaitForSec());
-            Point.transform.position = latePosition;
+            StartCoroutine(setPosition(latePosition));
         }
             else
         {
@@ -27,9 +26,11 @@ public class Gun : MonoBehaviour {
         }
 	}
 
-    IEnumerator setPosition()
+    IEnumerator setPosition(Vector3 newPos)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
+        newPos.y += 0.2f;
+        Point.transform.position = newPos;
     }
 
     Vector3 getPlayerPosition()
