@@ -5,14 +5,14 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
     public Vector3 vec_top;
     public Vector3 vec_bottom;
-    public float Speed = 1f;
-
+    public float Speed ;
+   
     Vector3 startingPosition;
 
 
     // Use this for initialization
     void Start () {
-        Vector3 newPosition = getPlayerPosition() + new Vector3(2, 2, 0);
+        Speed = Speed / 100;
         startingPosition = transform.position;
     }
 	
@@ -30,11 +30,13 @@ public class Gun : MonoBehaviour {
 
     IEnumerator setPosition(Vector3 playerPos)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0f);
         Vector3 pos = transform.position;
         Vector3 newPos = pos;
         float directionX;
         float directionY;
+        //float distanceX;
+       // float distanceY;
 
         if (pos.x <= playerPos.x)
             directionX = 1;
