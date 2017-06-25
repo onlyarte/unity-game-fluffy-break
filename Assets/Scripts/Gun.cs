@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour {
     GameObject Point;
+    float pointRange = 1.3f;
+
 
 	// Use this for initialization
 	void Start () {
-        Point = Instantiate(Resources.Load("Prefabs/Point"), getPlayerPosition(), transform.rotation) as GameObject;
+        Vector3 newPosition = getPlayerPosition() + new Vector3(2, 2, 0);
+        Point = Instantiate(Resources.Load("Prefabs/Point"), newPosition, transform.rotation) as GameObject;
     }
 	
 	// Update is called once per frame
@@ -21,7 +24,7 @@ public class Gun : MonoBehaviour {
         {
             if (Point)
             {
-                //Destroy(point);
+                Destroy(Point);
             }
         }
 	}
@@ -29,7 +32,7 @@ public class Gun : MonoBehaviour {
     IEnumerator setPosition(Vector3 newPos)
     {
         yield return new WaitForSeconds(.5f);
-        newPos.y += 0.2f;
+        newPos.y += pointRange;
         Point.transform.position = newPos;
     }
 
@@ -41,5 +44,15 @@ public class Gun : MonoBehaviour {
     bool isPlayerInRange()
     {
         return true;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("death");
+    }
+
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        OnTriggerEnter2D(collider);
     }
 }
