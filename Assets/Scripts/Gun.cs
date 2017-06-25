@@ -25,6 +25,7 @@ public class Gun : MonoBehaviour {
         }
             else
         {
+            transform.position= startingPosition;
         }
 	}
 
@@ -35,8 +36,8 @@ public class Gun : MonoBehaviour {
         Vector3 newPos = pos;
         float directionX;
         float directionY;
-        //float distanceX;
-       // float distanceY;
+        float distanceX=pos.x- getPlayerPosition().x;
+        float distanceY= pos.y - getPlayerPosition().y;
 
         if (pos.x <= playerPos.x)
             directionX = 1;
@@ -56,7 +57,11 @@ public class Gun : MonoBehaviour {
 
         if (playerPos.y != transform.position.y)
         {
-            newPos.y += Speed * directionY;
+            if (Mathf.Abs(distanceY) < Mathf.Abs(distanceX))
+            {
+                newPos.y += Speed * directionY * Mathf.Abs((distanceY) / distanceX);
+            }
+            else { newPos.y += Speed * directionY ; }
         }
 
         transform.position = newPos;
@@ -75,6 +80,7 @@ public class Gun : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+       
         transform.position = startingPosition;
         PlayerController.current.Death();
     }
