@@ -5,6 +5,7 @@ using UnityEngine;
 public class OpenDoorButton : ButtonAbstract {
 
     public Door door;
+    public float ExitTime = 5f;
 
     protected override IEnumerator ButtonEnterAction()
     {
@@ -14,7 +15,7 @@ public class OpenDoorButton : ButtonAbstract {
 
     protected override IEnumerator ButtonExitAction()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(ExitTime);
         door.DoorClose();
     }
 }
