@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayButton : MonoBehaviour
 {
     public MyButton playButton;
+    public DeathCounter counter;
 
     // Use this for initialization
     void Start()
     {
+        counter.resetCounter();
         playButton.signalOnClick.AddListener(this.ShowLevel);
     }
 
