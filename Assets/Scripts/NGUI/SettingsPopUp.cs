@@ -12,6 +12,7 @@ public class SettingsPopUp : MonoBehaviour {
 
 
     void Start () {
+        Time.timeScale = 0;
         resumeButton.signalOnClick.AddListener(this.CloseSettings);
         backgroundButton.signalOnClick.AddListener(this.CloseSettings);
         respawnButton.signalOnClick.AddListener(this.Respawn);
@@ -20,6 +21,7 @@ public class SettingsPopUp : MonoBehaviour {
 	
 	void CloseSettings()
     {
+        Time.timeScale = 1;
         Destroy(this.gameObject);
     }
 
