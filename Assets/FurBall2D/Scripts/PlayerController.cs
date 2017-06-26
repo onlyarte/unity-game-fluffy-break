@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 startingPosition;
 
+    public AudioClip backgroundMusic = null;
+    AudioSource backgroundSource = null;
+
     void Awake()
     {
         current = this;
@@ -37,7 +40,12 @@ public class PlayerController : MonoBehaviour {
 		anim = GetComponent<Animator>();
 
 		Cloud = GameObject.Find("Cloud");
-	}
+
+        backgroundSource = gameObject.AddComponent<AudioSource>();
+        backgroundSource.clip = backgroundMusic;
+        backgroundSource.loop = true;
+        backgroundSource.Play();
+    }
 
 
 	void OnCollisionEnter2D(Collision2D collision2D) {
