@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SettingsPopUp : MonoBehaviour {
+
     public MyButton backgroundButton;
     public MyButton resumeButton;
     public MyButton respawnButton;
     public MyButton menuButton;
-
-
 
     void Start () {
         Time.timeScale = 0;
@@ -27,12 +26,14 @@ public class SettingsPopUp : MonoBehaviour {
 
     void Respawn()
     {
+        Time.timeScale = 1;
         CloseSettings();
         PlayerController.current.Death();
     }
 
     void Menu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 }

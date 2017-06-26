@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    public DeathCounter counter;
+    public int level = 0;
+    public LevelController levelController;
+
     public static PlayerController current;
 	
 	public float maxSpeed = 6f;
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour {
         backgroundSource.clip = backgroundMusic;
         backgroundSource.loop = true;
         backgroundSource.Play();
+
+        levelController = new LevelController(level);
     }
 
 
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour {
     public void Death()
     {
         transform.position = startingPosition;
-        counter.addDeath(1);
+        levelController.addDeath();
     }
 
 }
