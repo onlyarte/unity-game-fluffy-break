@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class PlayButton : MonoBehaviour
+public class StartButton : MonoBehaviour
 {
-    public MyButton playButton;
+    public MyButton startButton;
 
     // Use this for initialization
     void Start()
     {
-        playButton.signalOnClick.AddListener(this.ShowLevel);
+        startButton.signalOnClick.AddListener(this.ShowLevel);
     }
 
     void ShowLevel()
     {
-        SceneManager.LoadScene("Entering");
+        SceneManager.LoadScene("Level1");
     }
 }
