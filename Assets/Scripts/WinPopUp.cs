@@ -38,6 +38,9 @@ public class WinPopUp : MonoBehaviour {
     {
         Time.timeScale = 1;
         int nextLevel = PlayerController.current.level + 1;
-        SceneManager.LoadScene("Level" + nextLevel);
+        if(nextLevel >= 3)
+            SceneManager.LoadScene("Final");
+        else
+            SceneManager.LoadScene("Level" + nextLevel);
     }
 }
